@@ -1,0 +1,95 @@
+/* Persian / RTL overlay.
+   Loaded after style.css on fa.html. The base sheet already uses logical
+   properties, so this file only has to change what direction cannot flip on its
+   own: the type stack, the horizontal-scroll mask, and the code blocks, which
+   stay left-to-right because their content is shell commands. */
+
+:root {
+  --font-ui: 'Vazirmatn', 'Inter', system-ui, sans-serif;
+}
+
+body {
+  line-height: 1.85;
+  letter-spacing: 0;
+}
+
+h1, h2, h3 { letter-spacing: 0; line-height: 1.4; }
+
+/* Persian numerals in the source would break the mono alignment of the figures,
+   so numbers stay Latin and keep the mono face. */
+.stat-num,
+.stat-unit,
+.bar-label,
+.bar-value,
+.panel-meta,
+.unit,
+.verdict strong,
+.step-num,
+.idx,
+.code-lang,
+.copy-btn,
+.part-link,
+.kicker,
+.eyebrow,
+.part-tag,
+.feature-index,
+.swap-tag {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Kickers and tags read as Persian text, so only their direction is isolated
+   while the font follows the UI stack. */
+.kicker,
+.eyebrow,
+.part-tag,
+.feature-index,
+.swap-tag,
+.stat-label,
+.part-for {
+  direction: rtl;
+  font-family: var(--font-ui);
+  letter-spacing: 0;
+}
+
+.eyebrow { font-size: 0.78rem; }
+.kicker { font-size: 0.76rem; }
+.part-tag { font-size: 0.72rem; }
+.feature-index { font-size: 0.8rem; }
+.swap-tag { font-size: 0.68rem; min-width: 2.8rem; }
+
+/* The nav fade has to point at the new trailing edge. */
+.site-nav {
+  mask-image: linear-gradient(to left, transparent 0, #000 10px, #000 calc(100% - 18px), transparent 100%);
+}
+
+/* Commands are copied into a shell, so they stay LTR and left-aligned even
+   inside the RTL page. */
+pre,
+pre code,
+.side-open code {
+  direction: ltr;
+  text-align: left;
+}
+
+/* Inline code inside Persian sentences keeps its own direction without
+   dragging the surrounding punctuation around. */
+code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* The mono face has no Persian coverage; let numerals use it while the label
+   beside them uses the UI font. */
+.stat-top { direction: ltr; justify-content: flex-end; }
+.stat-top { flex-direction: row; }
+
+.lede,
+.problem-copy p,
+.part-body,
+.feature-text p,
+.bench-copy p,
+.limits p,
+.stat-detail,
+.side-warn,
+.bench-shot figcaption { text-wrap: pretty; }

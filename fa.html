@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ModelSetupHub — نصب، تنظیم و اندازه‌گیری مدل‌های AI محلی</title>
+<meta name="description" content="یک جعبه‌ابزار متن‌باز برای اجرای مدل‌های AI روی دستگاه خودتان: شناسایی سخت‌افزار، مدیریت سرویس Ollama، کار با مدل‌ها، و بنچمارک پارامترهای تولید در برابر یکدیگر.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Vazirmatn:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/rtl.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">رفتن به محتوا</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="nav-island">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">&#9670;</span>
+        <span class="brand-name">ModelSetupHub</span>
+      </a>
+      <nav class="site-nav" aria-label="بخش‌ها">
+        <a href="#parts">معماری</a>
+        <a href="#dashboard">داشبورد</a>
+        <a href="#benchmark">بنچمارک</a>
+        <a href="#setup">راه‌اندازی</a>
+        <a href="#limits">محدودیت‌ها</a>
+      </nav>
+      <a class="nav-cta" href="https://github.com/ModelSetupHub">GitHub</a>
+      <a class="nav-lang" href="index.html" lang="en" title="English version">EN</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span> جعبه‌ابزار متن‌باز برای AI محلی</p>
+    <h1>مدل‌های AI محلی را نصب، تنظیم و <em>اندازه‌گیری</em> کنید.</h1>
+    <p class="lede">
+      اجرای مدل روی دستگاه خودتان امروز ممکن است — اما راه‌اندازی‌اش دردناک. ModelSetupHub سخت‌افزارتان را می‌خواند،
+      سرویس Ollama را مدیریت می‌کند، مدل‌ها را دست می‌گیرد، و کاری را می‌کند که بیشتر ابزارها از آن می‌گذرند: اندازه
+      می‌گیرد که کدام تنظیم واقعاً سریع‌تر است.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#setup">شروع کنید</a>
+      <a class="btn btn-ghost" href="https://github.com/ModelSetupHub">دیدن در GitHub</a>
+    </div>
+
+    <ul class="stat-strip">
+      <li class="s-green">
+        <p class="stat-top">
+          <span class="stat-num">3</span>
+          <span class="stat-unit">رابط</span>
+        </p>
+        <p class="stat-label">یک هسته‌ی مشترک</p>
+        <p class="stat-detail">کتابخانه‌ی پایتون، سرور MCP، داشبورد وب</p>
+      </li>
+      <li class="s-blue">
+        <p class="stat-top">
+          <span class="stat-num">23</span>
+          <span class="stat-unit">گزینه</span>
+        </p>
+        <p class="stat-label">قابل اندازه‌گیری</p>
+        <p class="stat-detail">هر پارامتر تولید Ollama، قابل مقایسه</p>
+      </li>
+      <li class="s-amber">
+        <p class="stat-top">
+          <span class="stat-num">100</span>
+          <span class="stat-unit">%</span>
+        </p>
+        <p class="stat-label">روی دستگاه خودتان</p>
+        <p class="stat-detail">بدون حساب کاربری، بدون تلمتری، بدون آپلود</p>
+      </li>
+    </ul>
+
+    <figure class="shot hero-shot">
+      <a class="shot-link" href="assets/img/benchmark-results.png" target="_blank" rel="noopener">
+        <img src="assets/img/benchmark-results.png" alt="داشبورد در حال نمایش نتیجه‌ی بنچمارک: سریع‌ترین کانفیگ، نوارهای مقایسه‌ی سرعت تولید، سرعت پرامپت و زمان پاسخ، و جدول خلاصه." width="1077" height="596" loading="eager">
+        <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
+      </a>
+    </figure>
+  </div>
+</section>
+
+<section class="problem" aria-labelledby="problem-title">
+  <div class="wrap">
+    <div class="problem-grid">
+      <div class="problem-copy">
+        <p class="kicker">مشکل</p>
+        <h2 id="problem-title">راه‌اندازی محلی، حدس‌هایی پخش‌شده در پست‌های انجمن است.</h2>
+        <p>
+          باید بدانید کارت گرافیکتان چقدر VRAM دارد، کدام مدل در آن جا می‌شود، چه پارامتری را برای سرعت عوض کنید، و
+          خطای مبهم <code>llama-server</code> واقعاً چه معنایی دارد. این جعبه‌ابزار هر یک از این حدس‌ها را با چیزی
+          جایگزین می‌کند که از دستگاه خودتان خوانده می‌شود.
+        </p>
+      </div>
+      <ul class="swap-list">
+        <li>
+          <span class="swap-from"><span class="swap-tag">قبل</span> حدس زدن اینکه چه مدلی جا می‌شود</span>
+          <span class="swap-to"><span class="swap-tag">بعد</span> خواندن VRAM واقعی شما</span>
+        </li>
+        <li>
+          <span class="swap-from"><span class="swap-tag">قبل</span> کپی کردن پارامترهای دیگران</span>
+          <span class="swap-to"><span class="swap-tag">بعد</span> بنچمارک کردنشان در برابر هم</span>
+        </li>
+        <li>
+          <span class="swap-from"><span class="swap-tag">قبل</span> خطاهای مبهم زمان اجرا</span>
+          <span class="swap-to"><span class="swap-tag">بعد</span> متن خطا، عیناً</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="parts" id="parts" aria-labelledby="parts-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">معماری</p>
+      <h2 id="parts-title">سه راه ورود، یک موتور</h2>
+      <p>هر سه با یک کتابخانه‌ی مشترک کار می‌کنند، پس می‌توانید بدون یادگیری دوباره بین آن‌ها جابه‌جا شوید.</p>
+    </header>
+
+    <div class="part-grid">
+      <article class="part part-green">
+        <p class="part-tag">کتابخانه</p>
+        <h3>Core</h3>
+        <p class="part-body">
+          پکیج پایتونی که کار واقعی را انجام می‌دهد: شناسایی سخت‌افزار برای CPU، رم و VRAM کارت گرافیک، کنترل سرویس
+          Ollama، چرخه‌ی عمر مدل‌ها، بنچمارک، محیط‌های پایتون، و یک دانلود‌منیجر با قابلیت resume.
+        </p>
+        <p class="part-for">برای اسکریپت‌نویسی خودتان</p>
+        <a class="part-link" href="https://github.com/ModelSetupHub/Core">ریپوی Core &larr;</a>
+      </article>
+
+      <article class="part part-violet">
+        <p class="part-tag">رابط عامل</p>
+        <h3>سرور MCP</h3>
+        <p class="part-body">
+          همان ابزارها، در اختیار یک AI agent. هدف را توصیف می‌کنید — <em>یک مدل کدنویسی مناسب سیستم من نصب کن</em> — و
+          agent خودش مراحل را انتخاب می‌کند.
+        </p>
+        <p class="part-for">برای وقتی می‌خواهید خودش انجامش دهد</p>
+        <a class="part-link" href="https://github.com/ModelSetupHub">ریپوی MCP &larr;</a>
+      </article>
+
+      <article class="part part-blue">
+        <p class="part-tag">رابط گرافیکی</p>
+        <h3>داشبورد وب</h3>
+        <p class="part-body">
+          یک رابط گرافیکی محلی برای کسی که می‌داند چه می‌خواهد. هیچ تصمیمی جای شما گرفته نمی‌شود؛ این کار را سریع‌تر و
+          دقیق‌تر می‌کند و فرض می‌گیرد می‌دانید context window چیست.
+        </p>
+        <p class="part-for">برای کنترل کامل دستی</p>
+        <a class="part-link" href="https://github.com/ModelSetupHub/gui">ریپوی داشبورد &larr;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="dashboard" aria-labelledby="dash-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">داشبورد</p>
+      <h2 id="dash-title">چهار تب، به همان ترتیبی که استفاده می‌کنید</h2>
+    </header>
+
+    <article class="feature f-green">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">01</span> System</p>
+        <h3>اول دستگاه را بشناسید</h3>
+        <p>
+          یک اسکن کامل سخت‌افزار: پردازنده، ماژول‌های رم، کارت‌های گرافیک با VRAM، و دیسک‌ها با نوار مصرف. از اینجا شروع
+          کنید — عدد VRAM تعیین می‌کند چه مدلی قابل بارگذاری است. نتیجه کش می‌شود، پس فقط یک بار منتظر می‌مانید.
+        </p>
+      </div>
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/system.png" target="_blank" rel="noopener">
+          <img src="assets/img/system.png" alt="نتیجه‌ی اسکن سخت‌افزار با جزئیات پردازنده، ماژول‌های رم، VRAM کارت گرافیک و نوارهای مصرف دیسک." width="1070" height="587" loading="lazy">
+          <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
+        </a>
+      </figure>
+    </article>
+
+    <article class="feature f-blue">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">02</span> Ollama</p>
+        <h3>کنترل سرویس</h3>
+        <p>
+          وضعیت نصب و پروسه‌ی سرور در یک جا: روشن و خاموش کردن، خواندن نسخه، و اجرای نصب‌کننده‌ای که از قبل روی دستگاه
+          هست. وقتی اپ دسکتاپ ویندوز سرور را پشت سرتان دوباره راه می‌اندازد، صفحه همین را می‌گوید و ادعای توقفی که
+          نگرفته نمی‌کند.
+        </p>
+      </div>
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/ollama.png" target="_blank" rel="noopener">
+          <img src="assets/img/ollama.png" alt="تب Ollama با نمایش وضعیت نصب، وضعیت سرور و دکمه‌های روشن و خاموش کردن." width="1063" height="586" loading="lazy">
+          <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
+        </a>
+      </figure>
+    </article>
+
+    <article class="feature f-violet">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">03</span> Models</p>
+        <h3>هر چه یک مدل لازم دارد</h3>
+        <p>
+          فهرست مدل‌های نصب‌شده و مدل‌های بارگذاری‌شده در حافظه، با اطلاعات، بارگذاری، توقف و حذف روی هر سطر. زیرشان
+          فرم‌هایی برای اجرای یک پرامپت، ثبت یک فایل GGUF محلی، و ساختن نسخه‌ی کانفیگ‌شده از یک مدل — یک مدل جدید روی
+          دیسک، بدون دست خوردن نسخه‌ی اصلی.
+        </p>
+      </div>
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/models.png" target="_blank" rel="noopener">
+          <img src="assets/img/models.png" alt="تب Models با فهرست مدل‌های نصب‌شده و بارگذاری‌شده، عملیات هر سطر و فرم‌های زیر آن." width="1066" height="593" loading="lazy">
+          <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
+        </a>
+      </figure>
+    </article>
+
+    <article class="feature f-amber">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">04</span> Benchmark</p>
+        <h3>حدس زدن پارامترها را کنار بگذارید</h3>
+        <p>
+          یک مدل و چند پرامپت انتخاب کنید، چند مجموعه پارامتر تعریف کنید، و همه را اجرا کنید. کانفیگ را دستی از میان ۲۳
+          گزینه‌ی Ollama بسازید یا یک فایل JSON را رها کنید. هر کانفیگ همه‌ی پرامپت‌ها را اجرا می‌کند و مدل قبل از هر
+          اجرا پیش‌بارگذاری می‌شود تا زمان بارگذاری در زمان‌سنجی‌ها نیفتد.
+        </p>
+      </div>
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/benchmark-builder.png" target="_blank" rel="noopener">
+          <img src="assets/img/benchmark-builder.png" alt="فرم دستی کانفیگ با گزینه‌های تولید Ollama که در گروه‌های بازشو دسته‌بندی شده‌اند." width="1076" height="600" loading="lazy">
+          <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
+        </a>
+      </figure>
+    </article>
+  </div>
+</section>
+
+<section class="bench" id="benchmark" aria-labelledby="bench-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">قابلیت شاخص</p>
+      <h2 id="bench-title">یک مقایسه، نه یک نظر</h2>
+      <p>بقیه‌ی تب‌ها راحتی می‌آورند. این یکی عددی می‌دهد که وگرنه باید حدسش می‌زدید.</p>
+    </header>
+
+    <div class="bench-grid">
+      <figure class="bench-panel">
+        <figcaption class="panel-head">
+          <span class="panel-title">سرعت تولید</span>
+          <span class="panel-meta">4 configs &middot; qwen3vl</span>
+        </figcaption>
+        <ul class="bars">
+          <li class="is-best">
+            <span class="bar-label">config-3</span>
+            <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
+            <span class="bar-value">21.0</span>
+          </li>
+          <li>
+            <span class="bar-label">config-1</span>
+            <span class="bar-track"><span class="bar-fill" style="width:92%"></span></span>
+            <span class="bar-value">19.4</span>
+          </li>
+          <li>
+            <span class="bar-label">config-4</span>
+            <span class="bar-track"><span class="bar-fill" style="width:86%"></span></span>
+            <span class="bar-value">18.1</span>
+          </li>
+          <li>
+            <span class="bar-label">config-2</span>
+            <span class="bar-track"><span class="bar-fill" style="width:81%"></span></span>
+            <span class="bar-value">17.0</span>
+          </li>
+        </ul>
+        <p class="panel-foot">
+          <span class="unit">tokens / second</span>
+          <span class="verdict"><strong>config-3</strong> با ۸.۳٪ اختلاف برنده</span>
+        </p>
+      </figure>
+
+      <div class="bench-copy">
+        <p>
+          حکم اول می‌آید: کدام کانفیگ سریع‌تر تولید کرد و با چه اختلافی از نفر دوم. بعد سرعت تولید، سرعت پرامپت و زمان
+          پاسخ، هر یک نسبت به بهترین مقدار گروه خودش مقیاس‌بندی شده، و در ادامه یک جدول خلاصه و جزئیات هر پرامپت.
+        </p>
+        <p>
+          هر اجرا چند دقیقه طول می‌کشد، پس در یک ترد پس‌زمینه روی سرور انجام می‌شود — رفرش کردن مرورگر آن را از دست
+          نمی‌دهد. هر بار فقط یک مقایسه اجرا می‌شود، چون دو مقایسه‌ی همزمان برای یک GPU رقابت می‌کنند و هر زمان‌سنجی در
+          هر دو را بی‌معنا می‌سازند.
+        </p>
+        <p class="bench-tip">
+          <strong>آنچه اعداد را قابل استفاده می‌کند:</strong> seed را ثابت کنید و هر بار یک گزینه را عوض کنید. اگر دو
+          کانفیگ در چند جا تفاوت داشته باشند، نمی‌توانید اختلاف را به هیچ‌کدام نسبت دهید.
+        </p>
+      </div>
+    </div>
+
+    <figure class="shot bench-shot">
+      <a class="shot-link" href="assets/img/benchmark-import.png" target="_blank" rel="noopener">
+        <img src="assets/img/benchmark-import.png" alt="ورود کانفیگ‌ها از یک فایل JSON، با پیش‌نمایش آنچه سرور فهمیده، پیش از اعمال شدن." width="1075" height="600" loading="lazy">
+        <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
+      </a>
+      <figcaption>
+        کانفیگ‌ها می‌توانند از فایل هم بیایند — با رها کردن، انتخاب از فایل‌ها، یا چسباندن متن. اول روی سرور اعتبارسنجی و
+        پیش‌نمایش می‌شوند، چون یک فایل ممکن است مدل و پرامپت‌های خودش را هم داشته باشد و آن‌ها نباید بی‌صدا چیزی را که
+        نوشته‌اید بازنویسی کنند.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="setup" id="setup" aria-labelledby="setup-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">راه‌اندازی</p>
+      <h2 id="setup-title">چهار دستور و اجرا می‌شود</h2>
+      <p>پایتون ۳.۱۰ یا جدیدتر، به‌همراه Git برای گرفتن submodule هسته.</p>
+    </header>
+
+    <div class="setup-grid">
+      <ol class="steps">
+        <li>
+          <p class="step-head"><span class="step-num">1</span> کلون با submodule</p>
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-1" data-copy-label="کپی" data-copied-label="کپی شد" data-fallback-label="Ctrl+C را بزنید">کپی</button>
+            </div>
+            <pre><code id="cmd-1">git clone --recurse-submodules https://github.com/ModelSetupHub/gui.git
+cd gui</code></pre>
+          </div>
+        </li>
+        <li>
+          <p class="step-head"><span class="step-num">2</span> ساختن محیط مجازی</p>
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-2" data-copy-label="کپی" data-copied-label="کپی شد" data-fallback-label="Ctrl+C را بزنید">کپی</button>
+            </div>
+            <pre><code id="cmd-2">python -m venv .venv
+.venv\Scripts\activate</code></pre>
+          </div>
+        </li>
+        <li>
+          <p class="step-head"><span class="step-num">3</span> نصب هسته، بعد وابستگی‌های وب</p>
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-3" data-copy-label="کپی" data-copied-label="کپی شد" data-fallback-label="Ctrl+C را بزنید">کپی</button>
+            </div>
+            <pre><code id="cmd-3">pip install -e ./core
+pip install -r requirements.txt</code></pre>
+          </div>
+        </li>
+        <li>
+          <p class="step-head"><span class="step-num">4</span> اجرا</p>
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-4" data-copy-label="کپی" data-copied-label="کپی شد" data-fallback-label="Ctrl+C را بزنید">کپی</button>
+            </div>
+            <pre><code id="cmd-4">python app.py</code></pre>
+          </div>
+        </li>
+      </ol>
+
+      <aside class="setup-side">
+        <p class="side-open">بعد <code>http://127.0.0.1:5000/</code> را باز کنید</p>
+        <div class="side-warn">
+          <p class="warn-head">خط اول مرحله‌ی ۳ را رد نکنید</p>
+          <p>
+            <code>core</code> یک submodule است، نه کپی کد. بدون <code>pip install -e ./core</code> هر درخواست با
+            <code>ModuleNotFoundError: No module named 'core'</code> شکست می‌خورد.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="honest" id="limits" aria-labelledby="honest-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">پیش از نصب</p>
+      <h2 id="honest-title">سه محدودیت، صادقانه از پیش</h2>
+    </header>
+
+    <ul class="limits">
+      <li class="l-amber">
+        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> فعلاً فقط ویندوز</h3>
+        <p>اسکنر سخت‌افزار روی PowerShell و WMI ساخته شده، پس تب System هنوز جای دیگری کار نمی‌کند.</p>
+      </li>
+      <li class="l-red">
+        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> بدون احراز هویت</h3>
+        <p>
+          داشبورد یک سرور محلی بدون احراز هویت است، و endpointهایش Ollama را روشن می‌کنند، مدل بار می‌کنند و حذف می‌کنند،
+          و نصب‌کننده روی میزبان اجرا می‌کنند. روی localhost نگهش دارید — برای نشستن روی شبکه ساخته نشده.
+        </p>
+      </li>
+      <li class="l-blue">
+        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> Ollama لازم است</h3>
+        <p>هر چیزی جز تب System به نصب بودن Ollama روی دستگاه نیاز دارد.</p>
+      </li>
+    </ul>
+
+    <div class="closing">
+      <h2>دو رابط، یک جعبه‌ابزار.</h2>
+      <p>رایگان و متن‌باز. رابطی را بردارید که با روش کار شما می‌خواند.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/ModelSetupHub">دیدن ریپوها</a>
+        <a class="btn btn-ghost" href="#setup">بازگشت به راه‌اندازی</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <p class="foot-name"><span class="brand-mark" aria-hidden="true">&#9670;</span> ModelSetupHub</p>
+      <p class="foot-note">متن‌باز، رایگان، و محلی به‌طور پیش‌فرض.</p>
+    </div>
+    <nav class="foot-links" aria-label="ریپوها">
+      <a href="index.html" lang="en">English</a>
+      <a href="https://github.com/ModelSetupHub/Core">Core</a>
+      <a href="https://github.com/ModelSetupHub">سرور MCP</a>
+      <a href="https://github.com/ModelSetupHub/gui">داشبورد</a>
+      <a href="https://ollama.com/">Ollama</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/copy.js" defer></script>
+</body>
+</html>
