@@ -16,18 +16,21 @@
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-head">
-  <div class="wrap head-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">&#9670;</span>
-      <span class="brand-name">ModelSetupHub</span>
-    </a>
-    <nav class="site-nav" aria-label="Sections">
-      <a href="#parts">Architecture</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#benchmark">Benchmark</a>
-      <a href="#setup">Setup</a>
+  <div class="wrap">
+    <div class="nav-island">
+      <a class="brand" href="#top">
+        <span class="brand-mark" aria-hidden="true">&#9670;</span>
+        <span class="brand-name">ModelSetupHub</span>
+      </a>
+      <nav class="site-nav" aria-label="Sections">
+        <a href="#parts">Architecture</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#benchmark">Benchmark</a>
+        <a href="#setup">Setup</a>
+        <a href="#limits">Limits</a>
+      </nav>
       <a class="nav-cta" href="https://github.com/ModelSetupHub">GitHub</a>
-    </nav>
+    </div>
   </div>
 </header>
 
@@ -38,8 +41,8 @@
     <h1>Install, tune and <em>measure</em> local AI models.</h1>
     <p class="lede">
       Running a model on your own machine is possible today — setting it up is not pleasant. ModelSetupHub reads your
-      hardware, manages the Ollama runtime, handles your models, and does the thing most tools skip: runs the same
-      prompts under different parameter sets so you can see which one is actually faster.
+      hardware, manages the Ollama runtime, handles your models, and does the thing most tools skip: it measures which
+      settings are actually faster.
     </p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#setup">Get started</a>
@@ -47,22 +50,37 @@
     </div>
 
     <ul class="stat-strip">
-      <li>
-        <strong class="c-green">3</strong>
-        <span>ways in — library, AI agent, dashboard</span>
+      <li class="s-green">
+        <p class="stat-top">
+          <span class="stat-num">3</span>
+          <span class="stat-unit">interfaces</span>
+        </p>
+        <p class="stat-label">One engine</p>
+        <p class="stat-detail">Python library, MCP server, web dashboard</p>
       </li>
-      <li>
-        <strong class="c-blue">23</strong>
-        <span>Ollama options you can compare</span>
+      <li class="s-blue">
+        <p class="stat-top">
+          <span class="stat-num">23</span>
+          <span class="stat-unit">options</span>
+        </p>
+        <p class="stat-label">Measurable</p>
+        <p class="stat-detail">Every Ollama generation parameter, compared</p>
       </li>
-      <li>
-        <strong class="c-amber">0</strong>
-        <span>data leaves your machine</span>
+      <li class="s-amber">
+        <p class="stat-top">
+          <span class="stat-num">100</span>
+          <span class="stat-unit">%</span>
+        </p>
+        <p class="stat-label">On your machine</p>
+        <p class="stat-detail">No account, no telemetry, no upload</p>
       </li>
     </ul>
 
-    <figure class="hero-shot">
-      <img src="assets/img/benchmark-results.png" alt="The dashboard showing benchmark results: the fastest configuration, comparison bars for output speed, prompt speed and response time, and a summary table." width="1077" height="596" loading="eager">
+    <figure class="shot hero-shot">
+      <a class="shot-link" href="assets/img/benchmark-results.png" target="_blank" rel="noopener">
+        <img src="assets/img/benchmark-results.png" alt="The dashboard showing benchmark results: the fastest configuration, comparison bars for output speed, prompt speed and response time, and a summary table." width="1077" height="596" loading="eager">
+        <span class="shot-zoom">Open full size</span>
+      </a>
     </figure>
   </div>
 </section>
@@ -74,23 +92,23 @@
         <p class="kicker">The problem</p>
         <h2 id="problem-title">Local setup is guesswork spread across forum posts.</h2>
         <p>
-          To run a model you need to know how much VRAM your card has, which model fits in it, which parameters to
-          change for speed, and what an opaque <code>llama-server</code> error actually means. This toolkit replaces
-          each of those guesses with something you can read off your own machine.
+          You need to know how much VRAM your card has, which model fits in it, which parameters to change for speed,
+          and what an opaque <code>llama-server</code> error actually means. This toolkit replaces each of those guesses
+          with something you can read off your own machine.
         </p>
       </div>
       <ul class="swap-list">
         <li>
-          <span class="swap-from"><span class="sr-only">Instead of: </span>Guessing which model fits</span>
-          <span class="swap-to c-green">Read your real VRAM</span>
+          <span class="swap-from"><span class="swap-tag">Before</span> Guessing which model fits</span>
+          <span class="swap-to"><span class="swap-tag">After</span> Read your real VRAM</span>
         </li>
         <li>
-          <span class="swap-from"><span class="sr-only">Instead of: </span>Copying someone's parameters</span>
-          <span class="swap-to c-green">Benchmark them side by side</span>
+          <span class="swap-from"><span class="swap-tag">Before</span> Copying someone's parameters</span>
+          <span class="swap-to"><span class="swap-tag">After</span> Benchmark them side by side</span>
         </li>
         <li>
-          <span class="swap-from"><span class="sr-only">Instead of: </span>Cryptic runtime failures</span>
-          <span class="swap-to c-green">The error text, verbatim</span>
+          <span class="swap-from"><span class="swap-tag">Before</span> Cryptic runtime failures</span>
+          <span class="swap-to"><span class="swap-tag">After</span> The error text, verbatim</span>
         </li>
       </ul>
     </div>
@@ -102,7 +120,7 @@
     <header class="sec-head">
       <p class="kicker">Architecture</p>
       <h2 id="parts-title">Three ways in, one engine</h2>
-      <p>All three drive the same library. Only the way you reach it differs — so you can switch without relearning anything.</p>
+      <p>All three drive the same library, so you can switch without relearning anything.</p>
     </header>
 
     <div class="part-grid">
@@ -158,8 +176,11 @@
           here — the VRAM figure decides which models you can actually load. The result is cached, so you wait once.
         </p>
       </div>
-      <figure class="feature-shot">
-        <img src="assets/img/system.png" alt="Hardware scan results showing processor details, memory modules, GPU VRAM and disk usage bars." width="1070" height="587" loading="lazy">
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/system.png" target="_blank" rel="noopener">
+          <img src="assets/img/system.png" alt="Hardware scan results showing processor details, memory modules, GPU VRAM and disk usage bars." width="1070" height="587" loading="lazy">
+          <span class="shot-zoom">Open full size</span>
+        </a>
       </figure>
     </article>
 
@@ -173,8 +194,11 @@
           instead of claiming a stop that did not stick.
         </p>
       </div>
-      <figure class="feature-shot">
-        <img src="assets/img/ollama.png" alt="The Ollama tab showing installation state, server status and start and stop controls." width="1063" height="586" loading="lazy">
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/ollama.png" target="_blank" rel="noopener">
+          <img src="assets/img/ollama.png" alt="The Ollama tab showing installation state, server status and start and stop controls." width="1063" height="586" loading="lazy">
+          <span class="shot-zoom">Open full size</span>
+        </a>
       </figure>
     </article>
 
@@ -188,8 +212,11 @@
           with the original untouched.
         </p>
       </div>
-      <figure class="feature-shot">
-        <img src="assets/img/models.png" alt="The Models tab listing installed and loaded models with per-row actions and forms below." width="1066" height="593" loading="lazy">
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/models.png" target="_blank" rel="noopener">
+          <img src="assets/img/models.png" alt="The Models tab listing installed and loaded models with per-row actions and forms below." width="1066" height="593" loading="lazy">
+          <span class="shot-zoom">Open full size</span>
+        </a>
       </figure>
     </article>
 
@@ -203,8 +230,11 @@
           preloaded before each one so load time never lands in the timings.
         </p>
       </div>
-      <figure class="feature-shot">
-        <img src="assets/img/benchmark-builder.png" alt="The manual configuration form with Ollama generation options grouped into collapsible sections." width="1076" height="600" loading="lazy">
+      <figure class="shot feature-shot">
+        <a class="shot-link" href="assets/img/benchmark-builder.png" target="_blank" rel="noopener">
+          <img src="assets/img/benchmark-builder.png" alt="The manual configuration form with Ollama generation options grouped into collapsible sections." width="1076" height="600" loading="lazy">
+          <span class="shot-zoom">Open full size</span>
+        </a>
       </figure>
     </article>
   </div>
@@ -222,7 +252,7 @@
       <figure class="bench-panel">
         <figcaption class="panel-head">
           <span class="panel-title">Output speed</span>
-          <span class="panel-meta">4 configurations &middot; qwen3vl</span>
+          <span class="panel-meta">4 configs &middot; qwen3vl</span>
         </figcaption>
         <ul class="bars">
           <li class="is-best">
@@ -256,7 +286,7 @@
         <p>
           The verdict comes first: which configuration generated fastest, and by how much over the runner-up. Then output
           speed, prompt speed and response time, each scaled against the best value in its own group, followed by a
-          summary table and per-prompt detail for every configuration.
+          summary table and per-prompt detail.
         </p>
         <p>
           A run takes minutes, so it happens in a background thread on the server — reloading the browser does not lose
@@ -270,8 +300,11 @@
       </div>
     </div>
 
-    <figure class="bench-shot">
-      <img src="assets/img/benchmark-import.png" alt="Importing configurations from a JSON file, with a preview of what the server understood before it is applied." width="1075" height="600" loading="lazy">
+    <figure class="shot bench-shot">
+      <a class="shot-link" href="assets/img/benchmark-import.png" target="_blank" rel="noopener">
+        <img src="assets/img/benchmark-import.png" alt="Importing configurations from a JSON file, with a preview of what the server understood before it is applied." width="1075" height="600" loading="lazy">
+        <span class="shot-zoom">Open full size</span>
+      </a>
       <figcaption>
         Configurations can also come from a file — dropped, browsed or pasted. It is validated on the server and
         previewed first, because a file may carry its own model and prompts, and those should not silently overwrite what
@@ -293,23 +326,46 @@
       <ol class="steps">
         <li>
           <p class="step-head"><span class="step-num">1</span> Clone with the submodule</p>
-          <pre><code>git clone --recurse-submodules \
-  https://github.com/ModelSetupHub/gui.git
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-1">Copy</button>
+            </div>
+            <pre><code id="cmd-1">git clone --recurse-submodules https://github.com/ModelSetupHub/gui.git
 cd gui</code></pre>
+          </div>
         </li>
         <li>
           <p class="step-head"><span class="step-num">2</span> Create a virtual environment</p>
-          <pre><code>python -m venv .venv
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-2">Copy</button>
+            </div>
+            <pre><code id="cmd-2">python -m venv .venv
 .venv\Scripts\activate</code></pre>
+          </div>
         </li>
         <li>
           <p class="step-head"><span class="step-num">3</span> Install core, then the web dependencies</p>
-          <pre><code>pip install -e ./core
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-3">Copy</button>
+            </div>
+            <pre><code id="cmd-3">pip install -e ./core
 pip install -r requirements.txt</code></pre>
+          </div>
         </li>
         <li>
           <p class="step-head"><span class="step-num">4</span> Run it</p>
-          <pre><code>python app.py</code></pre>
+          <div class="code-box">
+            <div class="code-bar">
+              <span class="code-lang">bash</span>
+              <button class="copy-btn" type="button" data-copy-target="cmd-4">Copy</button>
+            </div>
+            <pre><code id="cmd-4">python app.py</code></pre>
+          </div>
         </li>
       </ol>
 
@@ -327,7 +383,7 @@ pip install -r requirements.txt</code></pre>
   </div>
 </section>
 
-<section class="honest" aria-labelledby="honest-title">
+<section class="honest" id="limits" aria-labelledby="honest-title">
   <div class="wrap">
     <header class="sec-head">
       <p class="kicker">Before you install</p>
@@ -335,19 +391,19 @@ pip install -r requirements.txt</code></pre>
     </header>
 
     <ul class="limits">
-      <li>
-        <h3><span class="limit-mark c-amber" aria-hidden="true">&#9670;</span> Windows only, for now</h3>
+      <li class="l-amber">
+        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> Windows only, for now</h3>
         <p>The hardware scanner is built on PowerShell and WMI, so the System tab does not work anywhere else yet.</p>
       </li>
-      <li>
-        <h3><span class="limit-mark c-red" aria-hidden="true">&#9670;</span> No authentication</h3>
+      <li class="l-red">
+        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> No authentication</h3>
         <p>
           The dashboard is a local server with no auth, and its endpoints start Ollama, load and remove models, and run
           installers on the host. Keep it on localhost — it is not built to sit on a network.
         </p>
       </li>
-      <li>
-        <h3><span class="limit-mark c-blue" aria-hidden="true">&#9670;</span> Ollama is required</h3>
+      <li class="l-blue">
+        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> Ollama is required</h3>
         <p>Everything except the System tab needs Ollama installed on the machine.</p>
       </li>
     </ul>
@@ -357,7 +413,7 @@ pip install -r requirements.txt</code></pre>
       <p>Free and open source. Take the interface that fits how you work.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://github.com/ModelSetupHub">Browse the repositories</a>
-        <a class="btn btn-ghost" href="#benchmark">Back to the benchmark</a>
+        <a class="btn btn-ghost" href="#setup">Back to setup</a>
       </div>
     </div>
   </div>
@@ -379,5 +435,6 @@ pip install -r requirements.txt</code></pre>
   </div>
 </footer>
 
+<script src="assets/js/copy.js" defer></script>
 </body>
 </html>
