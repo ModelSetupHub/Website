@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ModelSetupHub — Install, tune and measure local AI models</title>
+<meta name="description" content="An open-source toolkit for running AI models on your own machine: read your hardware, manage the Ollama runtime, handle models, and benchmark generation parameters against each other.">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark" aria-hidden="true">&#9670;</span>
+      <span class="brand-name">ModelSetupHub</span>
+    </a>
+    <nav class="site-nav" aria-label="Sections">
+      <a href="#parts">Architecture</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#benchmark">Benchmark</a>
+      <a href="#setup">Setup</a>
+      <a class="nav-cta" href="https://github.com/ModelSetupHub">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-inner">
+    <p class="eyebrow"><span class="dot" aria-hidden="true"></span> Open-source toolkit for local AI</p>
+    <h1>Install, tune and <em>measure</em> local AI models.</h1>
+    <p class="lede">
+      Running a model on your own machine is possible today — setting it up is not pleasant. ModelSetupHub reads your
+      hardware, manages the Ollama runtime, handles your models, and does the thing most tools skip: runs the same
+      prompts under different parameter sets so you can see which one is actually faster.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#setup">Get started</a>
+      <a class="btn btn-ghost" href="https://github.com/ModelSetupHub">View on GitHub</a>
+    </div>
+
+    <ul class="stat-strip">
+      <li>
+        <strong class="c-green">3</strong>
+        <span>ways in — library, AI agent, dashboard</span>
+      </li>
+      <li>
+        <strong class="c-blue">23</strong>
+        <span>Ollama options you can compare</span>
+      </li>
+      <li>
+        <strong class="c-amber">0</strong>
+        <span>data leaves your machine</span>
+      </li>
+    </ul>
+
+    <figure class="hero-shot">
+      <img src="assets/img/benchmark-results.png" alt="The dashboard showing benchmark results: the fastest configuration, comparison bars for output speed, prompt speed and response time, and a summary table." width="1077" height="596" loading="eager">
+    </figure>
+  </div>
+</section>
+
+<section class="problem" aria-labelledby="problem-title">
+  <div class="wrap">
+    <div class="problem-grid">
+      <div class="problem-copy">
+        <p class="kicker">The problem</p>
+        <h2 id="problem-title">Local setup is guesswork spread across forum posts.</h2>
+        <p>
+          To run a model you need to know how much VRAM your card has, which model fits in it, which parameters to
+          change for speed, and what an opaque <code>llama-server</code> error actually means. This toolkit replaces
+          each of those guesses with something you can read off your own machine.
+        </p>
+      </div>
+      <ul class="swap-list">
+        <li>
+          <span class="swap-from"><span class="sr-only">Instead of: </span>Guessing which model fits</span>
+          <span class="swap-to c-green">Read your real VRAM</span>
+        </li>
+        <li>
+          <span class="swap-from"><span class="sr-only">Instead of: </span>Copying someone's parameters</span>
+          <span class="swap-to c-green">Benchmark them side by side</span>
+        </li>
+        <li>
+          <span class="swap-from"><span class="sr-only">Instead of: </span>Cryptic runtime failures</span>
+          <span class="swap-to c-green">The error text, verbatim</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="parts" id="parts" aria-labelledby="parts-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">Architecture</p>
+      <h2 id="parts-title">Three ways in, one engine</h2>
+      <p>All three drive the same library. Only the way you reach it differs — so you can switch without relearning anything.</p>
+    </header>
+
+    <div class="part-grid">
+      <article class="part part-green">
+        <p class="part-tag">Library</p>
+        <h3>Core</h3>
+        <p class="part-body">
+          The Python package that does the real work: hardware discovery for CPU, memory and GPU VRAM, Ollama service
+          control, the model lifecycle, benchmarking, Python environments, and a download manager with resume.
+        </p>
+        <p class="part-for">For scripting it yourself</p>
+        <a class="part-link" href="https://github.com/ModelSetupHub/Core">Core repository &rarr;</a>
+      </article>
+
+      <article class="part part-violet">
+        <p class="part-tag">Agent interface</p>
+        <h3>MCP server</h3>
+        <p class="part-body">
+          The same tools, handed to an AI agent. You describe the goal — <em>install a coding model that suits my
+          system</em> — and the agent picks the steps.
+        </p>
+        <p class="part-for">For "just handle it"</p>
+        <a class="part-link" href="https://github.com/ModelSetupHub">MCP repository &rarr;</a>
+      </article>
+
+      <article class="part part-blue">
+        <p class="part-tag">Graphical interface</p>
+        <h3>Web dashboard</h3>
+        <p class="part-body">
+          A local GUI for people who already know what they want. No decision is made for you, which makes it faster and
+          more precise — and assumes you know what a context window is.
+        </p>
+        <p class="part-for">For full manual control</p>
+        <a class="part-link" href="https://github.com/ModelSetupHub/gui">Dashboard repository &rarr;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="features" id="dashboard" aria-labelledby="dash-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">The dashboard</p>
+      <h2 id="dash-title">Four tabs, in the order you use them</h2>
+    </header>
+
+    <article class="feature f-green">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">01</span> System</p>
+        <h3>Know the machine first</h3>
+        <p>
+          A full hardware scan: processor, memory modules, graphics cards with their VRAM, disks with usage bars. Start
+          here — the VRAM figure decides which models you can actually load. The result is cached, so you wait once.
+        </p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/img/system.png" alt="Hardware scan results showing processor details, memory modules, GPU VRAM and disk usage bars." width="1070" height="587" loading="lazy">
+      </figure>
+    </article>
+
+    <article class="feature f-blue">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">02</span> Ollama</p>
+        <h3>Control the runtime</h3>
+        <p>
+          Installation state and the server process in one place: start it, stop it, read its version, run an installer
+          already on the machine. When the Windows desktop app restarts the server behind your back, the page says so
+          instead of claiming a stop that did not stick.
+        </p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/img/ollama.png" alt="The Ollama tab showing installation state, server status and start and stop controls." width="1063" height="586" loading="lazy">
+      </figure>
+    </article>
+
+    <article class="feature f-violet">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">03</span> Models</p>
+        <h3>Everything a model needs</h3>
+        <p>
+          The installed list and the in-memory list, with info, load, stop and remove on every row. Below them, forms to
+          run a single prompt, register a local GGUF file, and create a configured copy of a model — a new model on disk,
+          with the original untouched.
+        </p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/img/models.png" alt="The Models tab listing installed and loaded models with per-row actions and forms below." width="1066" height="593" loading="lazy">
+      </figure>
+    </article>
+
+    <article class="feature f-amber">
+      <div class="feature-text">
+        <p class="feature-index"><span class="idx">04</span> Benchmark</p>
+        <h3>Stop guessing at parameters</h3>
+        <p>
+          Pick a model and a set of prompts, define several parameter sets, run them all. Build a configuration by hand
+          from 23 Ollama options, or drop in a JSON file. Every configuration runs every prompt, and the model is
+          preloaded before each one so load time never lands in the timings.
+        </p>
+      </div>
+      <figure class="feature-shot">
+        <img src="assets/img/benchmark-builder.png" alt="The manual configuration form with Ollama generation options grouped into collapsible sections." width="1076" height="600" loading="lazy">
+      </figure>
+    </article>
+  </div>
+</section>
+
+<section class="bench" id="benchmark" aria-labelledby="bench-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">The headline feature</p>
+      <h2 id="bench-title">A comparison, not an opinion</h2>
+      <p>The other tabs bring convenience. This one gives you a number you would otherwise have to guess at.</p>
+    </header>
+
+    <div class="bench-grid">
+      <figure class="bench-panel">
+        <figcaption class="panel-head">
+          <span class="panel-title">Output speed</span>
+          <span class="panel-meta">4 configurations &middot; qwen3vl</span>
+        </figcaption>
+        <ul class="bars">
+          <li class="is-best">
+            <span class="bar-label">config-3</span>
+            <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
+            <span class="bar-value">21.0</span>
+          </li>
+          <li>
+            <span class="bar-label">config-1</span>
+            <span class="bar-track"><span class="bar-fill" style="width:92%"></span></span>
+            <span class="bar-value">19.4</span>
+          </li>
+          <li>
+            <span class="bar-label">config-4</span>
+            <span class="bar-track"><span class="bar-fill" style="width:86%"></span></span>
+            <span class="bar-value">18.1</span>
+          </li>
+          <li>
+            <span class="bar-label">config-2</span>
+            <span class="bar-track"><span class="bar-fill" style="width:81%"></span></span>
+            <span class="bar-value">17.0</span>
+          </li>
+        </ul>
+        <p class="panel-foot">
+          <span class="unit">tokens / second</span>
+          <span class="verdict"><strong>config-3</strong> wins by 8.3%</span>
+        </p>
+      </figure>
+
+      <div class="bench-copy">
+        <p>
+          The verdict comes first: which configuration generated fastest, and by how much over the runner-up. Then output
+          speed, prompt speed and response time, each scaled against the best value in its own group, followed by a
+          summary table and per-prompt detail for every configuration.
+        </p>
+        <p>
+          A run takes minutes, so it happens in a background thread on the server — reloading the browser does not lose
+          it. Only one comparison runs at a time, because two would contend for the same GPU and make every timing in
+          both meaningless.
+        </p>
+        <p class="bench-tip">
+          <strong>What makes the numbers usable:</strong> fix the seed and change one option at a time. If two
+          configurations differ in several places, you cannot attribute the difference to any one of them.
+        </p>
+      </div>
+    </div>
+
+    <figure class="bench-shot">
+      <img src="assets/img/benchmark-import.png" alt="Importing configurations from a JSON file, with a preview of what the server understood before it is applied." width="1075" height="600" loading="lazy">
+      <figcaption>
+        Configurations can also come from a file — dropped, browsed or pasted. It is validated on the server and
+        previewed first, because a file may carry its own model and prompts, and those should not silently overwrite what
+        you typed.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="setup" id="setup" aria-labelledby="setup-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">Setup</p>
+      <h2 id="setup-title">Four commands and it runs</h2>
+      <p>Python 3.10 or newer, plus Git to fetch the core submodule.</p>
+    </header>
+
+    <div class="setup-grid">
+      <ol class="steps">
+        <li>
+          <p class="step-head"><span class="step-num">1</span> Clone with the submodule</p>
+          <pre><code>git clone --recurse-submodules \
+  https://github.com/ModelSetupHub/gui.git
+cd gui</code></pre>
+        </li>
+        <li>
+          <p class="step-head"><span class="step-num">2</span> Create a virtual environment</p>
+          <pre><code>python -m venv .venv
+.venv\Scripts\activate</code></pre>
+        </li>
+        <li>
+          <p class="step-head"><span class="step-num">3</span> Install core, then the web dependencies</p>
+          <pre><code>pip install -e ./core
+pip install -r requirements.txt</code></pre>
+        </li>
+        <li>
+          <p class="step-head"><span class="step-num">4</span> Run it</p>
+          <pre><code>python app.py</code></pre>
+        </li>
+      </ol>
+
+      <aside class="setup-side">
+        <p class="side-open">Then open <code>http://127.0.0.1:5000/</code></p>
+        <div class="side-warn">
+          <p class="warn-head">Do not skip the first line of step 3</p>
+          <p>
+            <code>core</code> is a submodule, not a copy of the code. Without <code>pip install -e ./core</code> every
+            request fails with <code>ModuleNotFoundError: No module named 'core'</code>.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="honest" aria-labelledby="honest-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">Before you install</p>
+      <h2 id="honest-title">Three limits, stated up front</h2>
+    </header>
+
+    <ul class="limits">
+      <li>
+        <h3><span class="limit-mark c-amber" aria-hidden="true">&#9670;</span> Windows only, for now</h3>
+        <p>The hardware scanner is built on PowerShell and WMI, so the System tab does not work anywhere else yet.</p>
+      </li>
+      <li>
+        <h3><span class="limit-mark c-red" aria-hidden="true">&#9670;</span> No authentication</h3>
+        <p>
+          The dashboard is a local server with no auth, and its endpoints start Ollama, load and remove models, and run
+          installers on the host. Keep it on localhost — it is not built to sit on a network.
+        </p>
+      </li>
+      <li>
+        <h3><span class="limit-mark c-blue" aria-hidden="true">&#9670;</span> Ollama is required</h3>
+        <p>Everything except the System tab needs Ollama installed on the machine.</p>
+      </li>
+    </ul>
+
+    <div class="closing">
+      <h2>Both front ends, one toolkit.</h2>
+      <p>Free and open source. Take the interface that fits how you work.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/ModelSetupHub">Browse the repositories</a>
+        <a class="btn btn-ghost" href="#benchmark">Back to the benchmark</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap foot-inner">
+    <div class="foot-brand">
+      <p class="foot-name"><span class="brand-mark" aria-hidden="true">&#9670;</span> ModelSetupHub</p>
+      <p class="foot-note">Open source, free, and local by design.</p>
+    </div>
+    <nav class="foot-links" aria-label="Repositories">
+      <a href="https://github.com/ModelSetupHub/Core">Core</a>
+      <a href="https://github.com/ModelSetupHub">MCP server</a>
+      <a href="https://github.com/ModelSetupHub/gui">Dashboard</a>
+      <a href="https://ollama.com/">Ollama</a>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
