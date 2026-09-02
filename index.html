@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ModelSetupHub — Install, tune and measure local AI models</title>
-<meta name="description" content="An open-source toolkit for running AI models on your own machine: read your hardware, manage the Ollama runtime, handle models, and benchmark generation parameters against each other.">
+<meta name="description" content="An open-source toolkit for running AI models on your own machine: read your hardware, manage or install the Ollama runtime, handle models, prepare Python environments, and benchmark generation parameters against each other.">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,10 +24,10 @@
       </a>
       <nav class="site-nav" aria-label="Sections">
         <a href="#parts">Architecture</a>
-        <a href="#dashboard">Dashboard</a>
+        <a href="#capabilities">Capabilities</a>
         <a href="#benchmark">Benchmark</a>
+        <a href="#agent">Agent</a>
         <a href="#setup">Setup</a>
-        <a href="#limits">Limits</a>
       </nav>
       <a class="nav-cta" href="https://github.com/ModelSetupHub">GitHub</a>
       <a class="nav-lang" href="fa.html" lang="fa" title="نسخه‌ی فارسی">فا</a>
@@ -42,8 +42,8 @@
     <h1>Install, tune and <em>measure</em> local AI models.</h1>
     <p class="lede">
       Running a model on your own machine is possible today — setting it up is not pleasant. ModelSetupHub reads your
-      hardware, manages the Ollama runtime, handles your models, and does the thing most tools skip: it measures which
-      settings are actually faster.
+      hardware, manages the Ollama runtime, handles your models, prepares Python environments for the ones that run from
+      a script, and does the thing most tools skip: it measures which settings are actually faster.
     </p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#setup">Get started</a>
@@ -65,7 +65,7 @@
           <span class="stat-unit">options</span>
         </p>
         <p class="stat-label">Measurable</p>
-        <p class="stat-detail">Every Ollama generation parameter, compared</p>
+        <p class="stat-detail">Every generation parameter, compared</p>
       </li>
       <li class="s-amber">
         <p class="stat-top">
@@ -130,7 +130,8 @@
         <h3>Core</h3>
         <p class="part-body">
           The Python package that does the real work: hardware discovery for CPU, memory and GPU VRAM, Ollama service
-          control, the model lifecycle, benchmarking, Python environments, and a download manager with resume.
+          control and installation, the model lifecycle, benchmarking, Python environments for models that run from a
+          script, and a download manager with resume.
         </p>
         <p class="part-for">For scripting it yourself</p>
         <a class="part-link" href="https://github.com/ModelSetupHub/Core">Core repository &rarr;</a>
@@ -138,34 +139,38 @@
 
       <article class="part part-violet">
         <p class="part-tag">Agent interface</p>
-        <h3>MCP server</h3>
+        <h3>MCPServer</h3>
         <p class="part-body">
-          The same tools, handed to an AI agent. You describe the goal — <em>install a coding model that suits my
-          system</em> — and the agent picks the steps.
+          The same tools, handed to an AI agent through the Model Context Protocol. You describe the goal — <em>install a
+          coding model that suits my system</em> — and the agent picks the steps, reporting long operations as they run.
         </p>
         <p class="part-for">For "just handle it"</p>
-        <a class="part-link" href="https://github.com/ModelSetupHub">MCP repository &rarr;</a>
+        <a class="part-link" href="https://github.com/ModelSetupHub/MCPServer">MCPServer repository &rarr;</a>
       </article>
 
       <article class="part part-blue">
         <p class="part-tag">Graphical interface</p>
-        <h3>Web dashboard</h3>
+        <h3>WebApp</h3>
         <p class="part-body">
-          A local GUI for people who already know what they want. No decision is made for you, which makes it faster and
-          more precise — and assumes you know what a context window is.
+          A local dashboard for people who already know what they want. No decision is made for you, which makes it
+          faster and more precise — and assumes you know what a context window is. English and Persian.
         </p>
         <p class="part-for">For full manual control</p>
-        <a class="part-link" href="https://github.com/ModelSetupHub/gui">Dashboard repository &rarr;</a>
+        <a class="part-link" href="https://github.com/ModelSetupHub/WebApp">WebApp repository &rarr;</a>
       </article>
     </div>
   </div>
 </section>
 
-<section class="features" id="dashboard" aria-labelledby="dash-title">
+<section class="features" id="capabilities" aria-labelledby="dash-title">
   <div class="wrap">
     <header class="sec-head">
-      <p class="kicker">The dashboard</p>
-      <h2 id="dash-title">Four tabs, in the order you use them</h2>
+      <p class="kicker">What it does</p>
+      <h2 id="dash-title">Four capabilities, in the order you need them</h2>
+      <p>
+        These live in the library, so every interface reaches them. The screenshots are the dashboard; an agent calls the
+        same functions.
+      </p>
     </header>
 
     <article class="feature f-green">
@@ -190,9 +195,9 @@
         <p class="feature-index"><span class="idx">02</span> Ollama</p>
         <h3>Control the runtime</h3>
         <p>
-          Installation state and the server process in one place: start it, stop it, read its version, run an installer
-          already on the machine. When the Windows desktop app restarts the server behind your back, the page says so
-          instead of claiming a stop that did not stick.
+          Installation state and the server process in one place: start it, stop it, read its version, install Ollama
+          from an installer on the machine. When the Windows desktop app restarts the server behind your back, you are
+          told so instead of being shown a stop that did not stick.
         </p>
       </div>
       <figure class="shot feature-shot">
@@ -227,13 +232,13 @@
         <h3>Stop guessing at parameters</h3>
         <p>
           Pick a model and a set of prompts, define several parameter sets, run them all. Build a configuration by hand
-          from 23 Ollama options, or drop in a JSON file. Every configuration runs every prompt, and the model is
+          from 23 generation options, or drop in a JSON file. Every configuration runs every prompt, and the model is
           preloaded before each one so load time never lands in the timings.
         </p>
       </div>
       <figure class="shot feature-shot">
         <a class="shot-link" href="assets/img/benchmark-builder.png" target="_blank" rel="noopener">
-          <img src="assets/img/benchmark-builder.png" alt="The manual configuration form with Ollama generation options grouped into collapsible sections." width="1076" height="600" loading="lazy">
+          <img src="assets/img/benchmark-builder.png" alt="The manual configuration form with generation options grouped into collapsible sections." width="1076" height="600" loading="lazy">
           <span class="shot-zoom">Open full size</span>
         </a>
       </figure>
@@ -246,7 +251,7 @@
     <header class="sec-head">
       <p class="kicker">The headline feature</p>
       <h2 id="bench-title">A comparison, not an opinion</h2>
-      <p>The other tabs bring convenience. This one gives you a number you would otherwise have to guess at.</p>
+      <p>The rest brings convenience. This one gives you a number you would otherwise have to guess at.</p>
     </header>
 
     <div class="bench-grid">
@@ -290,9 +295,9 @@
           summary table and per-prompt detail.
         </p>
         <p>
-          A run takes minutes, so it happens in a background thread on the server — reloading the browser does not lose
-          it. Only one comparison runs at a time, because two would contend for the same GPU and make every timing in
-          both meaningless.
+          A run takes minutes, so it happens on a background thread — the interface stays usable and reloading the browser
+          does not lose it. Only one comparison runs at a time, because two would contend for the same GPU and make every
+          timing in both meaningless.
         </p>
         <p class="bench-tip">
           <strong>What makes the numbers usable:</strong> fix the seed and change one option at a time. If two
@@ -303,15 +308,74 @@
 
     <figure class="shot bench-shot">
       <a class="shot-link" href="assets/img/benchmark-import.png" target="_blank" rel="noopener">
-        <img src="assets/img/benchmark-import.png" alt="Importing configurations from a JSON file, with a preview of what the server understood before it is applied." width="1075" height="600" loading="lazy">
+        <img src="assets/img/benchmark-import.png" alt="Importing configurations from a JSON file, with a preview of what was understood before it is applied." width="1075" height="600" loading="lazy">
         <span class="shot-zoom">Open full size</span>
       </a>
       <figcaption>
-        Configurations can also come from a file — dropped, browsed or pasted. It is validated on the server and
-        previewed first, because a file may carry its own model and prompts, and those should not silently overwrite what
-        you typed.
+        Configurations can also come from a file — dropped, browsed or pasted. It is validated first and previewed before
+        anything is applied, because a file may carry its own model and prompts, and those should not silently overwrite
+        what you typed.
       </figcaption>
     </figure>
+  </div>
+</section>
+
+<section class="bench" id="agent" aria-labelledby="agent-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">The other way in</p>
+      <h2 id="agent-title">Or describe the goal and let an agent drive</h2>
+      <p>The same toolkit, handed to an AI assistant through the Model Context Protocol.</p>
+    </header>
+
+    <div class="bench-grid">
+      <figure class="bench-panel">
+        <figcaption class="panel-head">
+          <span class="panel-title">Downloading models</span>
+          <span class="panel-meta">2 of 3 &middot; 64%</span>
+        </figcaption>
+        <ul class="bars">
+          <li class="is-best">
+            <span class="bar-label">qwen3-8b</span>
+            <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
+            <span class="bar-value">done</span>
+          </li>
+          <li>
+            <span class="bar-label">llama3-8b</span>
+            <span class="bar-track"><span class="bar-fill" style="width:56%"></span></span>
+            <span class="bar-value">56%</span>
+          </li>
+          <li>
+            <span class="bar-label">python</span>
+            <span class="bar-track"><span class="bar-fill" style="width:0%"></span></span>
+            <span class="bar-value">wait</span>
+          </li>
+        </ul>
+        <p class="panel-foot">
+          <span class="unit">28.4 MB / s</span>
+          <span class="verdict"><strong>Cancel</strong> undoes it &middot; <strong>Stop</strong> only pauses</span>
+        </p>
+      </figure>
+
+      <div class="bench-copy">
+        <p>
+          Say <em>install a coding model that suits my system</em> and the agent reads your hardware, picks a model that
+          fits the VRAM it found, downloads it, and benchmarks the settings — choosing the order of steps itself and
+          explaining each one. It reaches every function in the library, including the ones the dashboard leaves out:
+          Python environments, and the download queue that feeds them.
+        </p>
+        <p>
+          A download or a benchmark takes minutes, which is too long for a chat to sit silent, so those draw a live
+          progress bar inside the conversation: an overall percentage, a row per file or per configuration, and the
+          current transfer rate. It survives a reload, because the state is on disk rather than in memory.
+        </p>
+        <p class="bench-tip">
+          <strong>Two controls, two meanings:</strong> Cancel ends the operation <em>and undoes it</em> — a cancelled
+          download deletes what it fetched. Stop merely suspends a transfer and keeps everything, so pressing it again
+          continues from where it left off.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -320,7 +384,7 @@
     <header class="sec-head">
       <p class="kicker">Setup</p>
       <h2 id="setup-title">Four commands and it runs</h2>
-      <p>Python 3.10 or newer, plus Git to fetch the core submodule.</p>
+      <p>Python 3.10 or newer, plus Git to fetch the core submodule. These four are for the dashboard.</p>
     </header>
 
     <div class="setup-grid">
@@ -332,8 +396,8 @@
               <span class="code-lang">bash</span>
               <button class="copy-btn" type="button" data-copy-target="cmd-1">Copy</button>
             </div>
-            <pre><code id="cmd-1">git clone --recurse-submodules https://github.com/ModelSetupHub/gui.git
-cd gui</code></pre>
+            <pre><code id="cmd-1">git clone --recurse-submodules https://github.com/ModelSetupHub/WebApp.git
+cd WebApp</code></pre>
           </div>
         </li>
         <li>
@@ -372,11 +436,15 @@ pip install -r requirements.txt</code></pre>
 
       <aside class="setup-side">
         <p class="side-open">Then open <code>http://127.0.0.1:5000/</code></p>
+        <p class="side-open">
+          Prefer the agent route? <a href="https://github.com/ModelSetupHub/MCPServer">MCPServer</a> installs the same
+          way and registers into any MCP client — Claude Desktop included, with a bundled setup utility.
+        </p>
         <div class="side-warn">
           <p class="warn-head">Do not skip the first line of step 3</p>
           <p>
             <code>core</code> is a submodule, not a copy of the code. Without <code>pip install -e ./core</code> every
-            request fails with <code>ModuleNotFoundError: No module named 'core'</code>.
+            request fails with <code>ModuleNotFoundError: No module named 'MSHCore'</code>.
           </p>
         </div>
       </aside>
@@ -384,33 +452,10 @@ pip install -r requirements.txt</code></pre>
   </div>
 </section>
 
-<section class="honest" id="limits" aria-labelledby="honest-title">
+<section class="honest">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="kicker">Before you install</p>
-      <h2 id="honest-title">Three limits, stated up front</h2>
-    </header>
-
-    <ul class="limits">
-      <li class="l-amber">
-        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> Windows only, for now</h3>
-        <p>The hardware scanner is built on PowerShell and WMI, so the System tab does not work anywhere else yet.</p>
-      </li>
-      <li class="l-red">
-        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> No authentication</h3>
-        <p>
-          The dashboard is a local server with no auth, and its endpoints start Ollama, load and remove models, and run
-          installers on the host. Keep it on localhost — it is not built to sit on a network.
-        </p>
-      </li>
-      <li class="l-blue">
-        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> Ollama is required</h3>
-        <p>Everything except the System tab needs Ollama installed on the machine.</p>
-      </li>
-    </ul>
-
     <div class="closing">
-      <h2>Both front ends, one toolkit.</h2>
+      <h2>One engine, three ways in.</h2>
       <p>Free and open source. Take the interface that fits how you work.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://github.com/ModelSetupHub">Browse the repositories</a>
@@ -430,8 +475,8 @@ pip install -r requirements.txt</code></pre>
     <nav class="foot-links" aria-label="Repositories">
       <a href="fa.html" lang="fa">فارسی</a>
       <a href="https://github.com/ModelSetupHub/Core">Core</a>
-      <a href="https://github.com/ModelSetupHub">MCP server</a>
-      <a href="https://github.com/ModelSetupHub/gui">Dashboard</a>
+      <a href="https://github.com/ModelSetupHub/WebApp">WebApp</a>
+      <a href="https://github.com/ModelSetupHub/MCPServer">MCPServer</a>
       <a href="https://ollama.com/">Ollama</a>
     </nav>
   </div>

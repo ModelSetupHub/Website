@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ModelSetupHub — نصب، تنظیم و اندازه‌گیری مدل‌های AI محلی</title>
-<meta name="description" content="یک جعبه‌ابزار متن‌باز برای اجرای مدل‌های AI روی دستگاه خودتان: شناسایی سخت‌افزار، مدیریت سرویس Ollama، کار با مدل‌ها، و بنچمارک پارامترهای تولید در برابر یکدیگر.">
+<meta name="description" content="یک جعبه‌ابزار متن‌باز برای اجرای مدل‌های AI روی دستگاه خودتان: شناسایی سخت‌افزار، مدیریت یا نصب سرویس Ollama، کار با مدل‌ها، آماده‌سازی محیط‌های پایتون، و بنچمارک پارامترهای تولید در برابر یکدیگر.">
 <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,10 +25,10 @@
       </a>
       <nav class="site-nav" aria-label="بخش‌ها">
         <a href="#parts">معماری</a>
-        <a href="#dashboard">داشبورد</a>
+        <a href="#capabilities">قابلیت‌ها</a>
         <a href="#benchmark">بنچمارک</a>
+        <a href="#agent">عامل</a>
         <a href="#setup">راه‌اندازی</a>
-        <a href="#limits">محدودیت‌ها</a>
       </nav>
       <a class="nav-cta" href="https://github.com/ModelSetupHub">GitHub</a>
       <a class="nav-lang" href="index.html" lang="en" title="English version">EN</a>
@@ -43,8 +43,8 @@
     <h1>مدل‌های AI محلی را نصب، تنظیم و <em>اندازه‌گیری</em> کنید.</h1>
     <p class="lede">
       اجرای مدل روی دستگاه خودتان امروز ممکن است — اما راه‌اندازی‌اش دردناک. ModelSetupHub سخت‌افزارتان را می‌خواند،
-      سرویس Ollama را مدیریت می‌کند، مدل‌ها را دست می‌گیرد، و کاری را می‌کند که بیشتر ابزارها از آن می‌گذرند: اندازه
-      می‌گیرد که کدام تنظیم واقعاً سریع‌تر است.
+      سرویس Ollama را مدیریت می‌کند، مدل‌ها را دست می‌گیرد، برای مدل‌هایی که از دل اسکریپت اجرا می‌شوند محیط پایتون آماده
+      می‌کند، و کاری را می‌کند که بیشتر ابزارها از آن می‌گذرند: اندازه می‌گیرد که کدام تنظیم واقعاً سریع‌تر است.
     </p>
     <div class="hero-actions">
       <a class="btn btn-primary" href="#setup">شروع کنید</a>
@@ -66,7 +66,7 @@
           <span class="stat-unit">گزینه</span>
         </p>
         <p class="stat-label">قابل اندازه‌گیری</p>
-        <p class="stat-detail">هر پارامتر تولید Ollama، قابل مقایسه</p>
+        <p class="stat-detail">هر پارامتر تولید، قابل مقایسه</p>
       </li>
       <li class="s-amber">
         <p class="stat-top">
@@ -130,8 +130,9 @@
         <p class="part-tag">کتابخانه</p>
         <h3>Core</h3>
         <p class="part-body">
-          پکیج پایتونی که کار واقعی را انجام می‌دهد: شناسایی سخت‌افزار برای CPU، رم و VRAM کارت گرافیک، کنترل سرویس
-          Ollama، چرخه‌ی عمر مدل‌ها، بنچمارک، محیط‌های پایتون، و یک دانلود‌منیجر با قابلیت resume.
+          پکیج پایتونی که کار واقعی را انجام می‌دهد: شناسایی سخت‌افزار برای CPU، رم و VRAM کارت گرافیک، کنترل و نصب
+          سرویس Ollama، چرخه‌ی عمر مدل‌ها، بنچمارک، محیط‌های پایتون برای مدل‌هایی که از دل اسکریپت اجرا می‌شوند، و یک
+          دانلود‌منیجر با قابلیت resume.
         </p>
         <p class="part-for">برای اسکریپت‌نویسی خودتان</p>
         <a class="part-link" href="https://github.com/ModelSetupHub/Core">ریپوی Core &larr;</a>
@@ -139,34 +140,39 @@
 
       <article class="part part-violet">
         <p class="part-tag">رابط عامل</p>
-        <h3>سرور MCP</h3>
+        <h3>MCPServer</h3>
         <p class="part-body">
-          همان ابزارها، در اختیار یک AI agent. هدف را توصیف می‌کنید — <em>یک مدل کدنویسی مناسب سیستم من نصب کن</em> — و
-          agent خودش مراحل را انتخاب می‌کند.
+          همان ابزارها، در اختیار یک AI agent از طریق پروتکل Model Context Protocol. هدف را توصیف می‌کنید — <em>یک مدل
+          کدنویسی مناسب سیستم من نصب کن</em> — و agent خودش مراحل را انتخاب می‌کند و عملیات‌های طولانی را در حین اجرا
+          گزارش می‌دهد.
         </p>
         <p class="part-for">برای وقتی می‌خواهید خودش انجامش دهد</p>
-        <a class="part-link" href="https://github.com/ModelSetupHub">ریپوی MCP &larr;</a>
+        <a class="part-link" href="https://github.com/ModelSetupHub/MCPServer">ریپوی MCPServer &larr;</a>
       </article>
 
       <article class="part part-blue">
         <p class="part-tag">رابط گرافیکی</p>
-        <h3>داشبورد وب</h3>
+        <h3>WebApp</h3>
         <p class="part-body">
-          یک رابط گرافیکی محلی برای کسی که می‌داند چه می‌خواهد. هیچ تصمیمی جای شما گرفته نمی‌شود؛ این کار را سریع‌تر و
-          دقیق‌تر می‌کند و فرض می‌گیرد می‌دانید context window چیست.
+          یک داشبورد محلی برای کسی که می‌داند چه می‌خواهد. هیچ تصمیمی جای شما گرفته نمی‌شود؛ این کار را سریع‌تر و
+          دقیق‌تر می‌کند و فرض می‌گیرد می‌دانید context window چیست. به دو زبان انگلیسی و فارسی.
         </p>
         <p class="part-for">برای کنترل کامل دستی</p>
-        <a class="part-link" href="https://github.com/ModelSetupHub/gui">ریپوی داشبورد &larr;</a>
+        <a class="part-link" href="https://github.com/ModelSetupHub/WebApp">ریپوی WebApp &larr;</a>
       </article>
     </div>
   </div>
 </section>
 
-<section class="features" id="dashboard" aria-labelledby="dash-title">
+<section class="features" id="capabilities" aria-labelledby="dash-title">
   <div class="wrap">
     <header class="sec-head">
-      <p class="kicker">داشبورد</p>
-      <h2 id="dash-title">چهار تب، به همان ترتیبی که استفاده می‌کنید</h2>
+      <p class="kicker">چه کاری انجام می‌دهد</p>
+      <h2 id="dash-title">چهار قابلیت، به همان ترتیبی که لازم‌شان دارید</h2>
+      <p>
+        این‌ها در کتابخانه زندگی می‌کنند، پس هر رابطی به آن‌ها می‌رسد. تصویرها از داشبورد است؛ یک agent همان توابع را صدا
+        می‌زند.
+      </p>
     </header>
 
     <article class="feature f-green">
@@ -191,9 +197,9 @@
         <p class="feature-index"><span class="idx">02</span> Ollama</p>
         <h3>کنترل سرویس</h3>
         <p>
-          وضعیت نصب و پروسه‌ی سرور در یک جا: روشن و خاموش کردن، خواندن نسخه، و اجرای نصب‌کننده‌ای که از قبل روی دستگاه
-          هست. وقتی اپ دسکتاپ ویندوز سرور را پشت سرتان دوباره راه می‌اندازد، صفحه همین را می‌گوید و ادعای توقفی که
-          نگرفته نمی‌کند.
+          وضعیت نصب و پروسه‌ی سرور در یک جا: روشن کردن، خاموش کردن، خواندن نسخه، و نصب Ollama از نصب‌کننده‌ای که روی
+          دستگاه هست. وقتی اپ دسکتاپ ویندوز سرور را پشت سرتان دوباره راه می‌اندازد، همین به شما گفته می‌شود و توقفی که
+          نگرفته نشان داده نمی‌شود.
         </p>
       </div>
       <figure class="shot feature-shot">
@@ -228,13 +234,13 @@
         <h3>حدس زدن پارامترها را کنار بگذارید</h3>
         <p>
           یک مدل و چند پرامپت انتخاب کنید، چند مجموعه پارامتر تعریف کنید، و همه را اجرا کنید. کانفیگ را دستی از میان ۲۳
-          گزینه‌ی Ollama بسازید یا یک فایل JSON را رها کنید. هر کانفیگ همه‌ی پرامپت‌ها را اجرا می‌کند و مدل قبل از هر
+          گزینه‌ی تولید بسازید یا یک فایل JSON را رها کنید. هر کانفیگ همه‌ی پرامپت‌ها را اجرا می‌کند و مدل قبل از هر
           اجرا پیش‌بارگذاری می‌شود تا زمان بارگذاری در زمان‌سنجی‌ها نیفتد.
         </p>
       </div>
       <figure class="shot feature-shot">
         <a class="shot-link" href="assets/img/benchmark-builder.png" target="_blank" rel="noopener">
-          <img src="assets/img/benchmark-builder.png" alt="فرم دستی کانفیگ با گزینه‌های تولید Ollama که در گروه‌های بازشو دسته‌بندی شده‌اند." width="1076" height="600" loading="lazy">
+          <img src="assets/img/benchmark-builder.png" alt="فرم دستی کانفیگ با گزینه‌های تولید که در گروه‌های بازشو دسته‌بندی شده‌اند." width="1076" height="600" loading="lazy">
           <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
         </a>
       </figure>
@@ -247,7 +253,7 @@
     <header class="sec-head">
       <p class="kicker">قابلیت شاخص</p>
       <h2 id="bench-title">یک مقایسه، نه یک نظر</h2>
-      <p>بقیه‌ی تب‌ها راحتی می‌آورند. این یکی عددی می‌دهد که وگرنه باید حدسش می‌زدید.</p>
+      <p>بقیه‌ی قابلیت‌ها راحتی می‌آورند. این یکی عددی می‌دهد که وگرنه باید حدسش می‌زدید.</p>
     </header>
 
     <div class="bench-grid">
@@ -290,9 +296,9 @@
           پاسخ، هر یک نسبت به بهترین مقدار گروه خودش مقیاس‌بندی شده، و در ادامه یک جدول خلاصه و جزئیات هر پرامپت.
         </p>
         <p>
-          هر اجرا چند دقیقه طول می‌کشد، پس در یک ترد پس‌زمینه روی سرور انجام می‌شود — رفرش کردن مرورگر آن را از دست
-          نمی‌دهد. هر بار فقط یک مقایسه اجرا می‌شود، چون دو مقایسه‌ی همزمان برای یک GPU رقابت می‌کنند و هر زمان‌سنجی در
-          هر دو را بی‌معنا می‌سازند.
+          هر اجرا چند دقیقه طول می‌کشد، پس در یک ترد پس‌زمینه انجام می‌شود — رابط قابل استفاده می‌ماند و رفرش کردن مرورگر
+          آن را از دست نمی‌دهد. هر بار فقط یک مقایسه اجرا می‌شود، چون دو مقایسه‌ی همزمان برای یک GPU رقابت می‌کنند و هر
+          زمان‌سنجی در هر دو را بی‌معنا می‌سازند.
         </p>
         <p class="bench-tip">
           <strong>آنچه اعداد را قابل استفاده می‌کند:</strong> seed را ثابت کنید و هر بار یک گزینه را عوض کنید. اگر دو
@@ -303,15 +309,74 @@
 
     <figure class="shot bench-shot">
       <a class="shot-link" href="assets/img/benchmark-import.png" target="_blank" rel="noopener">
-        <img src="assets/img/benchmark-import.png" alt="ورود کانفیگ‌ها از یک فایل JSON، با پیش‌نمایش آنچه سرور فهمیده، پیش از اعمال شدن." width="1075" height="600" loading="lazy">
+        <img src="assets/img/benchmark-import.png" alt="ورود کانفیگ‌ها از یک فایل JSON، با پیش‌نمایش آنچه فهمیده شده، پیش از اعمال شدن." width="1075" height="600" loading="lazy">
         <span class="shot-zoom">نمایش در اندازه‌ی کامل</span>
       </a>
       <figcaption>
-        کانفیگ‌ها می‌توانند از فایل هم بیایند — با رها کردن، انتخاب از فایل‌ها، یا چسباندن متن. اول روی سرور اعتبارسنجی و
-        پیش‌نمایش می‌شوند، چون یک فایل ممکن است مدل و پرامپت‌های خودش را هم داشته باشد و آن‌ها نباید بی‌صدا چیزی را که
+        کانفیگ‌ها می‌توانند از فایل هم بیایند — با رها کردن، انتخاب از فایل‌ها، یا چسباندن متن. اول اعتبارسنجی و پیش‌نمایش
+        می‌شوند و بعد اعمال، چون یک فایل ممکن است مدل و پرامپت‌های خودش را هم داشته باشد و آن‌ها نباید بی‌صدا چیزی را که
         نوشته‌اید بازنویسی کنند.
       </figcaption>
     </figure>
+  </div>
+</section>
+
+<section class="bench" id="agent" aria-labelledby="agent-title">
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="kicker">راه ورود دیگر</p>
+      <h2 id="agent-title">یا هدف را توصیف کنید و agent کار را ببرد</h2>
+      <p>همان جعبه‌ابزار، در اختیار یک دستیار هوش مصنوعی از طریق پروتکل Model Context Protocol.</p>
+    </header>
+
+    <div class="bench-grid">
+      <figure class="bench-panel">
+        <figcaption class="panel-head">
+          <span class="panel-title">دانلود مدل‌ها</span>
+          <span class="panel-meta">2 of 3 &middot; 64%</span>
+        </figcaption>
+        <ul class="bars">
+          <li class="is-best">
+            <span class="bar-label">qwen3-8b</span>
+            <span class="bar-track"><span class="bar-fill" style="width:100%"></span></span>
+            <span class="bar-value">done</span>
+          </li>
+          <li>
+            <span class="bar-label">llama3-8b</span>
+            <span class="bar-track"><span class="bar-fill" style="width:56%"></span></span>
+            <span class="bar-value">56%</span>
+          </li>
+          <li>
+            <span class="bar-label">python</span>
+            <span class="bar-track"><span class="bar-fill" style="width:0%"></span></span>
+            <span class="bar-value">wait</span>
+          </li>
+        </ul>
+        <p class="panel-foot">
+          <span class="unit">28.4 MB / s</span>
+          <span class="verdict"><strong>Cancel</strong> برمی‌گرداند &middot; <strong>Stop</strong> معلق می‌کند</span>
+        </p>
+      </figure>
+
+      <div class="bench-copy">
+        <p>
+          می‌گویید <em>یک مدل کدنویسی مناسب سیستم من نصب کن</em> و agent سخت‌افزارتان را می‌خواند، مدلی را انتخاب می‌کند
+          که در VRAM پیداشده جا می‌شود، دانلودش می‌کند، و تنظیماتش را بنچمارک می‌کند — ترتیب مراحل را خودش می‌چیند و هر
+          کدام را توضیح می‌دهد. به همه‌ی توابع کتابخانه می‌رسد، از جمله آن‌هایی که داشبورد پوشش نمی‌دهد: محیط‌های پایتون،
+          و صف دانلودی که آن‌ها را تغذیه می‌کند.
+        </p>
+        <p>
+          یک دانلود یا بنچمارک چند دقیقه طول می‌کشد، و این برای سکوت یک گفتگو زیادی طولانی است، پس این‌ها یک نوار پیشرفت
+          زنده داخل خودِ گفتگو رسم می‌کنند: درصد کلی، یک سطر برای هر فایل یا هر کانفیگ، و نرخ انتقال جاری. بعد از رفرش هم
+          سر جایش می‌ماند، چون وضعیتش روی دیسک است نه در حافظه.
+        </p>
+        <p class="bench-tip">
+          <strong>دو کنترل، دو معنا:</strong> دکمه‌ی Cancel عملیات را تمام می‌کند <em>و آن را برمی‌گرداند</em> — دانلود
+          لغو‌شده آنچه گرفته را حذف می‌کند. Stop تنها انتقال را معلق می‌کند و همه‌چیز را نگه می‌دارد، پس فشار دادن
+          دوباره‌اش از همان‌جا که مانده ادامه می‌دهد.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -320,7 +385,7 @@
     <header class="sec-head">
       <p class="kicker">راه‌اندازی</p>
       <h2 id="setup-title">چهار دستور و اجرا می‌شود</h2>
-      <p>پایتون ۳.۱۰ یا جدیدتر، به‌همراه Git برای گرفتن submodule هسته.</p>
+      <p>پایتون ۳.۱۰ یا جدیدتر، به‌همراه Git برای گرفتن submodule هسته. این چهار دستور برای داشبورد است.</p>
     </header>
 
     <div class="setup-grid">
@@ -332,8 +397,8 @@
               <span class="code-lang">bash</span>
               <button class="copy-btn" type="button" data-copy-target="cmd-1" data-copy-label="کپی" data-copied-label="کپی شد" data-fallback-label="Ctrl+C را بزنید">کپی</button>
             </div>
-            <pre><code id="cmd-1">git clone --recurse-submodules https://github.com/ModelSetupHub/gui.git
-cd gui</code></pre>
+            <pre><code id="cmd-1">git clone --recurse-submodules https://github.com/ModelSetupHub/WebApp.git
+cd WebApp</code></pre>
           </div>
         </li>
         <li>
@@ -372,11 +437,15 @@ pip install -r requirements.txt</code></pre>
 
       <aside class="setup-side">
         <p class="side-open">بعد <code>http://127.0.0.1:5000/</code> را باز کنید</p>
+        <p class="side-open">
+          مسیر agent را ترجیح می‌دهید؟ <a href="https://github.com/ModelSetupHub/MCPServer">MCPServer</a> به همین شکل نصب
+          می‌شود و در هر کلاینت MCP ثبت می‌شود — از جمله Claude Desktop، که ابزار راه‌اندازی خودش را هم همراه دارد.
+        </p>
         <div class="side-warn">
           <p class="warn-head">خط اول مرحله‌ی ۳ را رد نکنید</p>
           <p>
             <code>core</code> یک submodule است، نه کپی کد. بدون <code>pip install -e ./core</code> هر درخواست با
-            <code>ModuleNotFoundError: No module named 'core'</code> شکست می‌خورد.
+            <code>ModuleNotFoundError: No module named 'MSHCore'</code> شکست می‌خورد.
           </p>
         </div>
       </aside>
@@ -384,33 +453,10 @@ pip install -r requirements.txt</code></pre>
   </div>
 </section>
 
-<section class="honest" id="limits" aria-labelledby="honest-title">
+<section class="honest">
   <div class="wrap">
-    <header class="sec-head">
-      <p class="kicker">پیش از نصب</p>
-      <h2 id="honest-title">سه محدودیت، صادقانه از پیش</h2>
-    </header>
-
-    <ul class="limits">
-      <li class="l-amber">
-        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> فعلاً فقط ویندوز</h3>
-        <p>اسکنر سخت‌افزار روی PowerShell و WMI ساخته شده، پس تب System هنوز جای دیگری کار نمی‌کند.</p>
-      </li>
-      <li class="l-red">
-        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> بدون احراز هویت</h3>
-        <p>
-          داشبورد یک سرور محلی بدون احراز هویت است، و endpointهایش Ollama را روشن می‌کنند، مدل بار می‌کنند و حذف می‌کنند،
-          و نصب‌کننده روی میزبان اجرا می‌کنند. روی localhost نگهش دارید — برای نشستن روی شبکه ساخته نشده.
-        </p>
-      </li>
-      <li class="l-blue">
-        <h3><span class="limit-mark" aria-hidden="true">&#9670;</span> Ollama لازم است</h3>
-        <p>هر چیزی جز تب System به نصب بودن Ollama روی دستگاه نیاز دارد.</p>
-      </li>
-    </ul>
-
     <div class="closing">
-      <h2>دو رابط، یک جعبه‌ابزار.</h2>
+      <h2>یک موتور، سه راه ورود.</h2>
       <p>رایگان و متن‌باز. رابطی را بردارید که با روش کار شما می‌خواند.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="https://github.com/ModelSetupHub">دیدن ریپوها</a>
@@ -430,8 +476,8 @@ pip install -r requirements.txt</code></pre>
     <nav class="foot-links" aria-label="ریپوها">
       <a href="index.html" lang="en">English</a>
       <a href="https://github.com/ModelSetupHub/Core">Core</a>
-      <a href="https://github.com/ModelSetupHub">سرور MCP</a>
-      <a href="https://github.com/ModelSetupHub/gui">داشبورد</a>
+      <a href="https://github.com/ModelSetupHub/WebApp">WebApp</a>
+      <a href="https://github.com/ModelSetupHub/MCPServer">MCPServer</a>
       <a href="https://ollama.com/">Ollama</a>
     </nav>
   </div>

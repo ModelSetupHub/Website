@@ -616,6 +616,10 @@ main > section { scroll-margin-top: calc(var(--head-h) + 8px); }
 }
 .bench-tip strong { color: var(--amber); }
 
+/* The agent section reuses the benchmark layout and sits directly after it, so
+   it needs a hairline to separate two panels on the same background. */
+#agent { border-top: 1px solid var(--border-soft); }
+
 .bench-shot figcaption {
   margin-top: 0.9rem;
   font-size: 0.87rem;
@@ -706,11 +710,13 @@ main > section { scroll-margin-top: calc(var(--head-h) + 8px); }
 
 pre {
   margin: 0;
-  padding: 0.85rem 1rem;
+  padding-block: 0.85rem;
+  padding-inline: 1rem 0;
   overflow-x: auto;
 }
 pre code {
   display: block;
+  padding-inline-end: 1rem;
   font-size: 0.8rem;
   line-height: 1.75;
   color: var(--text);
@@ -725,6 +731,7 @@ pre code {
   border-radius: var(--radius);
 }
 .side-open { font-size: 0.92rem; color: var(--text-dim); }
+.side-open + .side-open { margin-top: 0.8rem; }
 .side-open code { color: var(--green); }
 
 .side-warn {
@@ -737,40 +744,9 @@ pre code {
 .warn-head { margin-bottom: 0.45rem; font-weight: 600; color: var(--amber); }
 .side-warn code { color: var(--text); }
 
-/* ---------- limits and closing ---------- */
+/* ---------- closing ---------- */
 
 .honest { padding: var(--gap-section) 0; }
-
-.limits {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 0.9rem;
-}
-.limits li {
-  padding: 1.25rem;
-  background: var(--panel);
-  border: 1px solid var(--border-soft);
-  border-inline-start: 2px solid var(--accent);
-  border-radius: var(--radius);
-  border-start-start-radius: 0;
-  border-end-start-radius: 0;
-}
-.l-amber { --accent: var(--amber); }
-.l-red   { --accent: var(--red); }
-.l-blue  { --accent: var(--blue); }
-
-.limits h3 {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 1rem;
-}
-.limit-mark { flex: none; font-size: 0.58rem; color: var(--accent); }
-.limits p { color: var(--text-dim); font-size: 0.91rem; }
 
 .closing {
   margin-top: 3rem;
@@ -780,6 +756,8 @@ pre code {
 }
 .closing h2 { font-size: clamp(1.4rem, 5.5vw, 1.8rem); }
 .closing p { margin-top: 0.75rem; color: var(--text-dim); font-size: 0.95rem; }
+/* .hero-actions is a flex row, which ignores the centred text alignment above. */
+.closing .hero-actions { justify-content: center; }
 
 /* ---------- footer ---------- */
 
@@ -825,9 +803,6 @@ pre code {
     align-items: center;
     gap: 1rem;
   }
-
-  .limits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .limits li:last-child { grid-column: span 2; }
 
   .foot-inner {
     display: flex;
@@ -917,9 +892,6 @@ pre code {
 
   .setup-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 3rem; align-items: start; }
   .setup-side { padding: 1.5rem; }
-
-  .limits { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.15rem; }
-  .limits li:last-child { grid-column: auto; }
 
   .closing { margin-top: 4.5rem; padding-top: 4rem; }
   .closing h2 { font-size: clamp(1.6rem, 3.2vw, 2.05rem); }
